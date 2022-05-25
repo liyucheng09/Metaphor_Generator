@@ -26,4 +26,9 @@ Label and sentence was splited by `\t`
 ![](https://github.com/nine09/Creative-Text-Generator/blob/master/images/samples.png)
 ![](https://github.com/nine09/Creative-Text-Generator/blob/master/images/CMC.png)
 
-Here we give some examples in CMC https://github.com/nine09/Creative-Text-Generator/blob/master/CMC/zh_dev.tsv, we will release the overall corpus after our paper been accepted, or you can contact me with e-mail (address is in my github profile).
+Here we give both train/eval split of CMC in the folder of `/CMC`.
+
+**Future Update Coming Soon!!** 
+We will produce a detailed and extented version of CMC later, with metaphor components manually annotated, e.g., `TENOR` (the subject of metaphor) and `COMPARATOR` (the verb used to compare, such as like).
+
+Besides, CMC will be merged with other available chinese metaphor resources to enlarge the size of the dataset.
