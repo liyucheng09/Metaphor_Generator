@@ -3,46 +3,45 @@ test=['母亲是避风的港湾，让归航的我不再漂泊。',
     '一艘银灰色的气垫船，像一匹纯种烈马，在金波粼粼的海面上飞掠而过。', 
     '几颗星星也连在一起，看上去好像一只巨大的勺子。']
 
-comparators = ['像','是','好像']
+comparators = ['像','是','好像','仿佛', '似', '好似']
 
-def find_nsubj(token):
-    for t in token.children:
-        if t.dep_ == 'nsubj':
-            return t
-    if token.dep_ !='ROOT':
-        return find_nsubj(token.head)
-    else:
-        return None
+class comparisons:
+    def __init__(self):
+        self.nlp = spacy.load('zh_core_web_sm')
+        self.comparators = ['像','是','好像','仿佛', '似', '好似']
 
-def find_dobj(token):
-    for t in token.children:
-        if t.dep_ == 'dobj':
-            return t
+    def find_nsubj(self, token):
+        for t in token.children:
+            if t.dep_ == 'nsubj':
+                return t.text
+        if token.dep_ !='ROOT':
+            return self.find_nsubj(token.head)
         else:
-            obj = find_dobj(t)
-            if obj is not None: return obj
-    return None
+            return None
 
-if __name__ == '__main__':
-    nlp = spacy.load('zh_core_web_trf')
-    comparisons = []
-    for sent in test:
-        doc = nlp(sent)
+    def find_dobj(self, token):
+        for t in token.children:
+            if t.dep_ == 'dobj':
+                return t.text
+            else:
+                obj = self.find_dobj(t)
+                if obj is not None: return obj
+        return None
+    
+    def parse(self, sent):
+        doc = self.nlp(sent)
         pair = None
         for token in doc:
             if token.head.text in comparators and token.dep_ == 'dobj':
-                vehicle = token
-                tenor = find_nsubj(token)
-                pair = [tenor, vehicle]
+                vehicle = token.text
+                tenor = self.find_nsubj(token)
+                pair = [tenor, vehicle, token.head.text]
                 break
-            if any([c.text in comparators for c in token.children]):
-                tenor = find_nsubj(token)
-                vehicle = find_dobj(token)
-                if vehicle is None and token.pos_== 'NOUN': vehicle = token
-                pair = [tenor, vehicle]
-                break
-        comparisons.append(pair)
-
-    print(comparisons)
-
-
+            for c in token.children:
+                if c.text in comparators:
+                    tenor = self.find_nsubj(token)
+                    vehicle = self.find_dobj(token)
+                    if vehicle is None and token.pos_== 'NOUN': vehicle = token.text
+                    pair = [tenor, vehicle, c.text]
+                    break
+        return pair

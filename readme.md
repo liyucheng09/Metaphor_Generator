@@ -1,14 +1,32 @@
-# Chinese Literature Dataset
-Chinese Literature Dataset (CLD) is a corpus contains only chinese literatures. Literature only corpus is been needed in some NLP tasks, like processing some kinds of texts which are more frequnt viewed in literatures, or analyisis of the difference between literature and other texts (like mews and dialogues). 
+# Chinese Metaphor Generation
 
-![](https://github.com/nine09/Creative-Text-Generator/blob/master/images/CLD.png)
+Source code and dataset of **INLG 2022 oral**: [Nominal Metaphor Generation with Multitask Learning](https://arxiv.org/abs/2206.05195).
 
-Chinese Literature Dataset consists of 7.31 millon sentences crawled from 1300+ chinese books, which has already been shuffled. Average length of all sentences is 29 tokens.
+首个中文比喻数据集，可以用于中文比喻识别与中文比喻生成。
 
-The download url is: https://pan.baidu.com/s/1XY72p_QHnYuP8-yQkOY0fA.
+## Chinese Metaphor Corpus
 
-# Chinese Metaphor Corpus
-There is no public Chinese metaphor corpus avaiable so far. This made some researches of Chinese metaphor is hard to begin, expecially whose neural approaches which need sufficient training dataset. We decide to break this restriction. We annotate 6000+ sentences manually, each sentence has one label: "is metaphor" or "not metaphor".
+The first Chinese metaphor corpus serving both metaphor identification and generation. The definition of metaphor in Chinese is different with its English counterpart. So we cannot borrow metaphor resource in English and use it in Chinese metaphor processing.
+
+We construct a big metaphor resoruce in Chinese with around 9000 metaphorical sentences with *tenor* and *vehicle* annotated. Some examples are shown below.
+
+```
+{"sent": "春风像一只彩笔，把整个世界勾勒得更加绚丽多彩", "tenor": "春风", "vehicle": "彩笔", "comparator": "像"}
+{"sent": "秋天，不仅是一个丰收的季节，还让我们饱览了迷人的景色。秋天在秋姑娘的点缀后，像一颗发光的明珠！", "tenor": "秋天", "vehicle": "明珠", "comparator": "像"}
+{"sent": "春风像个慈祥的母亲，拂着你的脸颊，使你感到舒畅，心旷神怡。", "tenor": "春风", "vehicle": "母亲", "comparator": "像"}
+{"sent": "秋天，田里的稻谷黄澄澄的，像一片片金色的海洋。天空是蓝蓝的，像一片无边无际的大海。", "tenor": "天空", "vehicle": "大海", "comparator": "像"}
+```
+
+As shown here metaphor sentences and their components are identified. To enlarge the dataset, we merge the dataset published in [Liu et al. 2018](https://aclanthology.org/D18-1183.pdf) with ours. If you use the dataset, please cite both our and their paper.
+
+The dataset can be found in `CMC/zh_CMC2.txt`.
+
+
+--- Old Version of CMC ---
+
+Chinese binary metaphor identification dataset. Each sentence within the dataset has a metaphor label indicating whether it is a metaphor or not. Both training and test splits of CMC are shown in `CMC/old_version`.
+
+Some examples shown here.
 
 ```
 1	月季花的叶子慢慢地伸平了，而且还长出了许多像羊胡子似的须根。
@@ -26,9 +44,30 @@ Label and sentence was splited by `\t`
 ![](https://github.com/nine09/Creative-Text-Generator/blob/master/images/samples.png)
 ![](https://github.com/nine09/Creative-Text-Generator/blob/master/images/CMC.png)
 
-Here we give both train/eval split of CMC in the folder of `/CMC`.
 
-**Future Update Coming Soon!!** 
-We will produce a detailed and extented version of CMC later, with metaphor components manually annotated, e.g., `TENOR` (the subject of metaphor) and `COMPARATOR` (the verb used to compare, such as like).
+## Chinese Literature Dataset
+Chinese Literature corpus (CLC) is a corpus contains only chinese literatures. Literature only corpus is been needed in some NLP tasks, like processing some kinds of texts which are more frequnt viewed in literatures, or analyisis of the difference between literature and other texts (like mews and dialogues). 
 
-Besides, CMC will be merged with other available chinese metaphor resources to enlarge the size of the dataset.
+![](https://github.com/nine09/Creative-Text-Generator/blob/master/images/CLD.png)
+
+Chinese Literature Dataset consists of 7.31 millon sentences crawled from 1300+ chinese books, which has already been shuffled. Average length of all sentences is 29 tokens.
+
+The download url is: https://pan.baidu.com/s/1XY72p_QHnYuP8-yQkOY0fA.
+
+
+## citation
+
+If you use our resource, do remember citing our paper:
+
+```
+@misc{https://doi.org/10.48550/arxiv.2206.05195,
+  doi = {10.48550/ARXIV.2206.05195},
+  url = {https://arxiv.org/abs/2206.05195},
+  author = {Li, Yucheng and Lin, Chenghua and Geurin, Frank},
+  keywords = {Computation and Language (cs.CL), FOS: Computer and information sciences, FOS: Computer and information sciences},
+  title = {Nominal Metaphor Generation with Multitask Learning},
+  publisher = {arXiv},
+  year = {2022},
+  copyright = {arXiv.org perpetual, non-exclusive license}
+}
+```
