@@ -6,11 +6,11 @@ import sys
 import datasets
 
 if __name__ == '__main__':
-    model_name, cmc_path, max_length, epochs, save_path = sys.argv[1:]
+    model_name, cmc_path, max_length, epochs, save_path, script_path = sys.argv[1:]
     max_length = int(max_length)
     epochs = int(epochs)
 
-    ds = datasets.load_dataset('model/cmc_dataset.py', data_dir=cmc_path, split='train')
+    ds = datasets.load_dataset(script_path, data_dir=cmc_path, split='train')
     tokenizer = BertTokenizer.from_pretrained(model_name)
 
     def process_dataset(examples):

@@ -16,9 +16,10 @@ cmc_path = $ENV(HOME)/cmc/CMC/zh_CMC2.txt
 max_length = 256
 epochs = 3
 save_path = /vol/research/lyc/cmc/checkpoint/gpt2
+script_path = $ENV(HOME)/cmc/model/cmc_dataset.py
 
 executable    = $ENV(HOME)/.conda/envs/lyc/bin/python
-arguments     = $ENV(HOME)/cmc/model/gpt2.py $(model_name) $(cmc_path) $(max_length) $(epochs) $(save_path)
+arguments     = $ENV(HOME)/cmc/model/gpt2.py $(model_name) $(cmc_path) $(max_length) $(epochs) $(save_path) $(script_path)
 
 # ---------------------------------------------------
 # Universe (vanilla, docker)
@@ -43,7 +44,7 @@ environment = "mount=/vol/research/nlg,/vol/research/lyc_d,/vol/research/lyc"
 # Requirements for the Job (Requirements are explained in further detail in example09.submit_file)
 # NOTE: HasStornext is not valid on orca.
 requirements = (CUDAGlobalMemoryMb > 5000) && (CUDAGlobalMemoryMb <  25000) && \
-#              (HasStornext) && \
+               (HasStornext) && \
 			   (CUDACapability > 2.0)
 
 # --------------------------------------

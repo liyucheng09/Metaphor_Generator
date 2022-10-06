@@ -4,3 +4,7 @@ annotations/
 runs/
 corpus/
 .vscode/
+*.out
+*.log
+*.error
+docker_stderror
