@@ -11,7 +11,8 @@ class Simile(datasets.GeneratorBasedBuilder):
     def _info(self):
 
         feature = {
-            'sent': datasets.Sequence(datasets.Value('string')),
+            'tokens': datasets.Sequence(datasets.Value('string')),
+            'sent': datasets.Value('string'),
             'tags': datasets.Sequence(datasets.features.ClassLabel(num_classes=len(label2id), names=['O', 'ts', 'vs', 'tb', 'te', 'tm', 'vb', 've', 'vm'])),
             'label': datasets.features.ClassLabel(num_classes=2, names=['literal', 'simile'])
         }
@@ -44,7 +45,8 @@ class Simile(datasets.GeneratorBasedBuilder):
                     words.append(token)
                     tags.append(tag)
                 yield count, {
-                    'sent': words,
+                    'sent': ''.join(words),
+                    'tokens': words,
                     'tags': tags,
                     'label': label
                 }
