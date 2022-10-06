@@ -1,2 +1,6 @@
 
 .DS_Store
+annotations/
+runs/
+corpus/
+.vscode/
