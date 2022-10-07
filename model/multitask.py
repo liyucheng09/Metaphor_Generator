@@ -10,7 +10,7 @@ import pandas as pd
 
 
 if __name__ == '__main__':
-    model_name, cmc_path, clc_path, simile_path, max_length, epochs, save_path, simile_script_path = sys.argv[1:]
+    model_name, cmc_path, clc_path, simile_path, max_length, epochs, save_path, simile_script_path, cache_dir, = sys.argv[1:]
     max_length = int(max_length)
     epochs = int(epochs)
 
@@ -23,9 +23,9 @@ if __name__ == '__main__':
         return encoding
     
     def load_clc():
-        ds = datasets.Dataset.from_text(clc_path)
+        ds = datasets.Dataset.from_text(clc_path, cache_dir=cache_dir)
         ds = ds.add_column('meta_label', [-100]*len(ds))
-        ds = ds.map(process_dataset, fn_kwargs={'col_name': 'text'}, remove_columns=['text'])
+        ds = ds.map(process_dataset, fn_kwargs={'col_name': 'text'}, remove_columns=['text'], cache_file_name = cache_dir + '/clc_tensor.cache')
         return ds
     
     def load_simile():

@@ -12,16 +12,17 @@ JobBatchName = "Multitask for metaphor generation"
 # Executable and its arguments
 
 model_name = uer/gpt2-chinese-cluecorpussmall
-cmc_path = $ENV(HOME)/cmc/CMC/old_version/zh_trian.tsv
-clc_path = $ENV(HOME)/cmc/CLC_processed/processed_sentences.txt
+cmc_path = $ENV(HOME)/cmc/CMC/old_version/zh_train.tsv
+clc_path = /vol/research/lyc/cmc/CLC_processed/processed_sentences.txt
 simile_path = $ENV(HOME)/cmc/Chinese-Simile-Recognition-Dataset
 max_length = 256
 epochs = 3
 save_path = /vol/research/lyc/cmc/checkpoint/multitask
-simile_script_path = $ENV(HOME)/cmc/model/cmc_dataset.py
+simile_script_path = $ENV(HOME)/cmc/model/chinese_simile_dataset.py
+cache_dir = /mnt/fast/nobackup/users/yl02706/.cahce/huggingface/dataset
 
 executable    = $ENV(HOME)/.conda/envs/lyc/bin/python
-arguments     = $ENV(HOME)/cmc/model/gpt2.py $(model_name) $(cmc_path) $(clc_path) $(simile_path) $(max_length) $(epochs) $(save_path) $(simile_script_path)
+arguments     = $ENV(HOME)/cmc/model/multitask.py $(model_name) $(cmc_path) $(clc_path) $(simile_path) $(max_length) $(epochs) $(save_path) $(simile_script_path) $(cache_dir)
 
 # ---------------------------------------------------
 # Universe (vanilla, docker)
@@ -54,7 +55,7 @@ requirements = (CUDAGlobalMemoryMb > 5000) && (CUDAGlobalMemoryMb <  25000) && \
 request_GPUs     = 1
 # this needs to be specified for the AI@Surrey cluster if requesting a GPU
 +GPUMem          = 10000
-request_CPUs     = 1
+request_CPUs     = 4
 request_memory   = 8G
 
 #This job will complete in less than 1 hour
