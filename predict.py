@@ -12,7 +12,7 @@ prompt = [
 
 if __name__ == '__main__':
 
-    model_name, = sys.argv[1:]
+    model_name, output_path, = sys.argv[1:]
 
     tokenizer = BertTokenizer.from_pretrained(model_name)
     model = GPT2LMHeadModel.from_pretrained(model_name)
@@ -20,5 +20,10 @@ if __name__ == '__main__':
     generator = pipeline(task='text-generation', model=model, tokenizer = tokenizer, device = 0)
 
     output = generator(prompt)
+    with open(output_path, 'w', encoding='utf-8') as f:
+        for item in output:
+            f.write(item['generated_text']+'\n')
+    print('finish generation!')
 
-    print(output)
+
+    
