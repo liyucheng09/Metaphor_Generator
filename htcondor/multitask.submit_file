@@ -16,7 +16,7 @@ cmc_path = $ENV(HOME)/cmc/CMC/old_version/zh_train.tsv
 clc_path = /vol/research/lyc/cmc/CLC_processed/processed_sentences.txt
 simile_path = $ENV(HOME)/cmc/Chinese-Simile-Recognition-Dataset
 max_length = 256
-epochs = 3
+epochs = 1
 save_path = /vol/research/lyc/cmc/checkpoint/multitask
 simile_script_path = $ENV(HOME)/cmc/model/chinese_simile_dataset.py
 cache_dir = /mnt/fast/nobackup/users/yl02706/.cahce/huggingface/dataset
@@ -46,7 +46,7 @@ environment = "mount=/vol/research/nlg,/vol/research/lyc_d,/vol/research/lyc"
 # -------------------------------------
 # Requirements for the Job (Requirements are explained in further detail in example09.submit_file)
 # NOTE: HasStornext is not valid on orca.
-requirements = (CUDAGlobalMemoryMb > 5000) && (CUDAGlobalMemoryMb <  25000) && \
+requirements = (CUDAGlobalMemoryMb > 15000) && (CUDAGlobalMemoryMb <  25000) && \
                (HasStornext) && \
 			   (CUDACapability > 2.0)
 
@@ -59,7 +59,7 @@ request_CPUs     = 4
 request_memory   = 8G
 
 #This job will complete in less than 1 hour
-+JobRunTime = 5
++JobRunTime = 240
 
 #This job can checkpoint
 +CanCheckpoint = true

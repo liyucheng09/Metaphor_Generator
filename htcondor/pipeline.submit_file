@@ -12,9 +12,10 @@ JobBatchName = "Pipeline for metaphor generation"
 # Executable and its arguments
 
 model_name = /vol/research/lyc/cmc/checkpoint/gpt2
+output_path = $ENV(HOME)/cmc/generated_examples/gpt2.txt
 
 executable    = $ENV(HOME)/.conda/envs/lyc/bin/python
-arguments     = $ENV(HOME)/cmc/predict.py $(model_name)
+arguments     = $ENV(HOME)/cmc/predict.py $(model_name) $(output_path)
 
 # ---------------------------------------------------
 # Universe (vanilla, docker)
@@ -39,7 +40,7 @@ environment = "mount=/vol/research/nlg,/vol/research/lyc_d,/vol/research/lyc"
 # Requirements for the Job (Requirements are explained in further detail in example09.submit_file)
 # NOTE: HasStornext is not valid on orca.
 requirements = (CUDAGlobalMemoryMb > 5000) && (CUDAGlobalMemoryMb <  25000) && \
-               (HasStornext) && \
+#               (HasStornext) && \
 			   (CUDACapability > 2.0)
 
 # --------------------------------------
