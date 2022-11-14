@@ -56,9 +56,11 @@ if __name__ == '__main__':
         do_eval=False,
         per_device_train_batch_size=2,
         num_train_epochs=epochs,
-        save_strategy='no',
+        save_strategy='steps',
         logging_strategy = 'steps',
+        save_steps = 2000,
         logging_steps = 500,
+        save_total_limit = 2,
     )
 
     trainer = Trainer(
