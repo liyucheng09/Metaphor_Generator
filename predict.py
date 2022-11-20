@@ -19,7 +19,7 @@ if __name__ == '__main__':
 
     generator = pipeline(task='text-generation', model=model, tokenizer = tokenizer, device = -1)
 
-    output = generator(prompt, eos_token_ids = 102, prefix='[CLS]', pad_token_ids = 0)
+    output = generator(prompt, eos_token_id = 102, prefix='[CLS]', pad_token_id = 0)
     # output = generator(prompt, max_length=20, prefix='[CLS]')
     with open(output_path, 'w', encoding='utf-8') as f:
         for item in output:

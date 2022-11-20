@@ -7,12 +7,14 @@ from models import Multitask
 import sys
 import datasets
 import pandas as pd
+from transformers.trainer_utils import get_last_checkpoint, is_main_process
 
 
 if __name__ == '__main__':
     model_name, cmc_path, clc_path, simile_path, max_length, epochs, save_path, simile_script_path, cache_dir, = sys.argv[1:]
     max_length = int(max_length)
     epochs = int(epochs)
+    last_checkpoint = get_last_checkpoint(save_path)
 
     # simile_ds = datasets.load_dataset(simile_script_path, data_dir=cmc_path, split='train')
     tokenizer = BertTokenizer.from_pretrained(model_name)
@@ -70,8 +72,5 @@ if __name__ == '__main__':
         tokenizer=tokenizer,
     )
 
-    trainer.train()
+    trainer.train(resume_from_checkpoint=last_checkpoint)
     trainer.save_model()
-
-
-
