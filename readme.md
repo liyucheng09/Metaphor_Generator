@@ -42,6 +42,9 @@ Chinese Literature Dataset consists of 7.31 millon sentences crawled from 1300+ 
 
 The download url is: https://pan.baidu.com/s/1XY72p_QHnYuP8-yQkOY0fA.
 
+## Model
+
+Please refer to [here](https://github.com/liyucheng09/Metaphor_Generator/tree/master/model/readme.md).
 
 ## citation
 
